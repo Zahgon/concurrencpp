@@ -2,31 +2,10 @@
 
 using concurrencpp::details::shared_result_state_base;
 
-concurrencpp::details::shared_await_context* shared_result_state_base::result_ready_constant() noexcept {
-    return reinterpret_cast<shared_await_context*>(-1);
-}
+concurrencpp::details::shared_await_context* shared_result_state_base::result_ready_constant() noexcept { __builtin_trap() /* STUB: not implemented */; }
 
-concurrencpp::result_status concurrencpp::details::shared_result_state_base::status() const noexcept {
-    return m_status.load(std::memory_order_acquire);
-}
+concurrencpp::result_status concurrencpp::details::shared_result_state_base::status() const noexcept { __builtin_trap() /* STUB: not implemented */; }
 
-bool shared_result_state_base::await(shared_await_context& awaiter) noexcept {
-    while (true) {
-        auto awaiter_before = m_awaiters.load(std::memory_order_acquire);
-        if (awaiter_before == result_ready_constant()) {
-            return false;
-        }
+bool shared_result_state_base::await(shared_await_context& awaiter) noexcept { __builtin_trap() /* STUB: not implemented */; }
 
-        awaiter.next = awaiter_before;
-        const auto swapped = m_awaiters.compare_exchange_weak(awaiter_before, &awaiter, std::memory_order_acq_rel);
-        if (swapped) {
-            return true;
-        }
-    }
-}
-
-void concurrencpp::details::shared_result_state_base::wait() noexcept {
-    if (status() == result_status::idle) {
-        m_status.wait(result_status::idle, std::memory_order_acquire);
-    }
-}
+void concurrencpp::details::shared_result_state_base::wait() noexcept { __builtin_trap() /* STUB: not implemented */; }
